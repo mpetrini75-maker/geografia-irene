@@ -1,4 +1,4 @@
-const CACHE = 'geografia-irene-v1';
+const CACHE = 'geografia-irene-v2';
 
 const ASSETS = [
   './',

@@ -33,6 +33,19 @@ servono = {p.name for p in pagine} | immagini | {"style.css", "app.js", "alert.j
 for f in sorted(servono - in_sw):
     errori.append(f"service-worker: manca {f}")
 
+# ogni riquadro con titolo (tranne data-no-voce) delle lezioni deve avere la sua registrazione
+n_audio = 0
+for slug in ("lombardia", "storia", "economia", "clima"):
+    t = (R / f"{slug}.html").read_text(encoding="utf-8")
+    cards = re.findall(r'<div class="card"( data-no-voce)?>\s*<h2>', t)
+    for n, (novoce,) in enumerate([(c,) for c in cards]):
+        if novoce:
+            continue
+        n_audio += 1
+        if not (R / "audio" / f"{slug}-{n}.mp3").exists():
+            errori.append(f"manca audio/{slug}-{n}.mp3 (rilancia strumenti/genera-audio.py)")
+
+print(f"audio attesi {n_audio} · ", end="")
 print(f"pagine {len(pagine)} · immagini {len(immagini)} · file nel service worker {len(in_sw)}")
 for e in errori:
     print("  !", e)

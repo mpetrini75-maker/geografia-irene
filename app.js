@@ -6,46 +6,37 @@ function toggleSol(id, btn){
   if(btn) btn.textContent = open ? "🙈 Nascondi soluzioni" : "🔑 Mostra soluzioni";
 }
 
-/* 🔊 Ascolta: ogni riquadro con un titolo si può far leggere a voce.
-   Irene impara meglio ascoltando che leggendo (profilo DSA): il tasto è su ogni card. */
+/* 🔊 Ascolta: ogni riquadro con un titolo ha la sua registrazione con voce naturale
+   (audio/<pagina>-<n>.mp3, fatte con strumenti/genera-audio.py).
+   Niente sintesi vocale del telefono: Marco l'ha bocciata, "estremamente robotica" (03/10/2026).
+   n = posizione del titolo <h2> fra tutti i riquadri della pagina, come nello script. */
 (function(){
-  if(!("speechSynthesis" in window)) return;
+  var pagina = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "");
+  var player = new Audio();
   var attivo = null;
 
-  function voceItaliana(){
-    var voci = speechSynthesis.getVoices().filter(function(v){ return /^it/i.test(v.lang); });
-    return voci.find(function(v){ return /google|natural|neural|alice|elsa|federica/i.test(v.name); }) || voci[0] || null;
-  }
-
-  function testoDa(card){
-    var copia = card.cloneNode(true);
-    copia.querySelectorAll(".ascolta, .solbtn, .sol, script, figure, pre").forEach(function(n){ n.remove(); });
-    return copia.innerText.replace(/[\u{1F300}-\u{1FAFF}☀-➿]/gu, " ").replace(/\s+/g, " ").trim();
-  }
-
   function ferma(){
-    speechSynthesis.cancel();
+    player.pause();
     if(attivo){ attivo.classList.remove("on"); attivo.textContent = "🔊 Ascolta"; attivo = null; }
   }
-
-  function parla(btn, card){
-    if(attivo === btn){ ferma(); return; }
-    ferma();
-    var u = new SpeechSynthesisUtterance(testoDa(card));
-    u.lang = "it-IT"; u.rate = 0.95;
-    var v = voceItaliana(); if(v) u.voice = v;
-    u.onend = u.onerror = function(){ if(attivo === btn) ferma(); };
-    attivo = btn; btn.classList.add("on"); btn.textContent = "⏹ Ferma";
-    speechSynthesis.speak(u);
-  }
+  player.addEventListener("ended", ferma);
+  player.addEventListener("error", function(){
+    if(attivo){ attivo.textContent = "🔇 Audio non disponibile"; attivo.classList.remove("on"); attivo = null; }
+  });
 
   function aggiungi(){
-    document.querySelectorAll(".card h2").forEach(function(h){
+    document.querySelectorAll(".card h2").forEach(function(h, n){
       var card = h.closest(".card");
       if(!card || card.hasAttribute("data-no-voce")) return;
       var b = document.createElement("button");
       b.className = "ascolta"; b.type = "button"; b.textContent = "🔊 Ascolta";
-      b.addEventListener("click", function(){ parla(b, card); });
+      b.addEventListener("click", function(){
+        if(attivo === b){ ferma(); return; }
+        ferma();
+        player.src = "audio/" + pagina + "-" + n + ".mp3";
+        attivo = b; b.classList.add("on"); b.textContent = "⏹ Ferma";
+        player.play().catch(function(){ ferma(); });
+      });
       h.parentNode.insertBefore(b, h);
     });
   }
