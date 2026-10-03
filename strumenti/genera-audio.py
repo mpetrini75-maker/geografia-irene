@@ -12,7 +12,8 @@ import edge_tts
 
 R = Path(__file__).resolve().parent.parent
 AUDIO = R / "audio"
-VOCE = "it-IT-IsabellaNeural"
+VOCE = "it-IT-ElsaNeural"   # provino "tre" scelto da Marco il 03/10: piu' veloce e piu' acuta, da ragazzina sveglia
+RATE, PITCH = "+20%", "+15Hz"
 LEZIONI = ["lombardia", "storia", "economia", "clima"]
 EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿⬀-⯿️‍]")
 
@@ -48,12 +49,12 @@ async def main():
                 continue
             testo = testo_card(card)
             nome = f"{slug}-{i}.mp3"
-            impronta = hashlib.sha1((VOCE + testo).encode()).hexdigest()
+            impronta = hashlib.sha1((VOCE + RATE + PITCH + testo).encode()).hexdigest()
             nuovo[nome] = impronta
             if not tutto and vecchio.get(nome) == impronta and (AUDIO / nome).exists():
                 saltati += 1
                 continue
-            await edge_tts.Communicate(testo, VOCE, rate="-5%").save(str(AUDIO / nome))
+            await edge_tts.Communicate(testo, VOCE, rate=RATE, pitch=PITCH).save(str(AUDIO / nome))
             fatti += 1
             print(f"  {nome}: {len(testo)} caratteri")
     for f in AUDIO.glob("*.mp3"):
