@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FAF6EE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Geografia di Irene">
+<script src="alert.js"></script>
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Il clima — Allenamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EE; --card:#FFFFFF; --ink:#2F2A24;
+    --accent:#2F7A55; --accent-soft:#DDEFE3;
+    --green:#3E8E5A; --green-soft:#E2F0E6;
+    --red:#C2492F; --red-soft:#F6E1DB;
+    --blue:#3B6EA5; --blue-soft:#E2ECF5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:"Lexend","Trebuchet MS",Verdana,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.7; letter-spacing:0.3px; padding:24px 14px 60px;}
+  .wrap{max-width:620px;margin:0 auto;}
+  .back{display:inline-block;background:var(--accent-soft);color:var(--accent);text-decoration:none;border-radius:12px;padding:8px 16px;font-size:0.98rem;font-weight:bold;margin:0 8px 14px 0;}
+  h1{color:var(--accent);font-size:1.6rem;text-align:center;margin:0 0 6px;}
+  .sub{text-align:center;color:#8a7f70;margin:0 0 26px;font-size:1rem;}
+  .card{background:var(--card);border-radius:18px;padding:22px 20px;margin-bottom:22px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);border:1px solid #efe7da;}
+  .card h2{margin:0 0 10px;font-size:1.25rem;color:var(--accent);}
+  .card .lead{color:#8a7f70;margin:0 0 12px;font-size:0.97rem;}
+  .levelbar{margin:0 0 12px;}
+  .lvrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:0.98rem;color:var(--accent);}
+  .lvdots{display:inline-flex;gap:6px;}
+  .lvdot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);border:2px solid var(--accent-soft);color:#b9ad9c;font-size:0.85rem;font-weight:bold;}
+  .lvdot.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+  .ex{margin:14px 0;}
+  .qnum{font-weight:bold;color:var(--accent);}
+  .qtext{font-size:1.1rem;margin:6px 0 8px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{background:var(--bg);border:2px solid var(--accent-soft);
+    border-radius:12px;padding:13px 14px;font-size:1.05rem;cursor:pointer;
+    text-align:left;font-family:inherit;color:var(--ink);transition:all .15s;}
+  .opt:hover{border-color:var(--accent);}
+  .opt.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:bold;}
+  .opt.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);}
+  .feedback{margin-top:10px;font-size:1.02rem;font-weight:bold;min-height:24px;}
+  .feedback.ok{color:var(--green);}
+  .feedback.no{color:var(--red);}
+  .progress{text-align:center;font-size:1.05rem;margin:12px 0 0;color:#8a7f70;}
+  .star{font-size:1.4rem;}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+  .match-col{display:flex;flex-direction:column;gap:10px;}
+  .match-btn{background:var(--bg);border:2px solid var(--accent-soft);border-radius:12px;
+    padding:12px;font-size:0.98rem;cursor:pointer;font-family:inherit;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;transition:all .15s;}
+  .match-btn:hover{border-color:var(--accent);}
+  .match-btn.sel{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:bold;}
+  .match-btn.done{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:bold;cursor:default;opacity:0.85;}
+  .match-btn.flash{border-color:var(--red);background:var(--red-soft);}
+  .restart{display:inline-block;margin:12px auto 0;background:var(--accent);color:#fff;border:none;
+    border-radius:12px;padding:11px 22px;font-size:1rem;cursor:pointer;font-family:inherit;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Indice</a><a class="back" href="clima.html">📖 Ripassa la lezione</a>
+  <h1>🏋️ Il clima — Allenamento</h1>
+  <p class="sub">Mattoncino 4 · 3 sezioni · 3 livelli ciascuna 💪</p>
+
+  <div class="card">
+    <h2>🧠 1. Domande</h2>
+    <p class="lead">Scegli la risposta giusta. Puoi riprovare finché non la trovi!</p>
+    <div class="levelbar" id="quiz-level"></div>
+    <div id="quiz-box"></div>
+    <div class="progress" id="quiz-prog"></div>
+  </div>
+
+  <div class="card">
+    <h2>✅ 2. Vero o falso</h2>
+    <p class="lead">Leggi la frase e tocca Vero o Falso. Dopo ti dico perché.</p>
+    <div class="levelbar" id="vf-level"></div>
+    <div id="vf-box"></div>
+    <div class="progress" id="vf-prog"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 3. Abbina</h2>
+    <p class="lead">Tocca una casella a sinistra, poi la sua coppia a destra. Collega tutte le coppie!</p>
+    <div class="levelbar" id="abbina-level"></div>
+    <div class="match-grid" id="abbina-grid"></div>
+    <div class="progress" id="abbina-prog"></div>
+  </div>
+</div>
+<script>
+window.ALLENAMENTO = {"quiz": [[{"q": "Il clima è…", "opts": ["il tempo normale di un luogo, che si ripete ogni anno", "il tempo di oggi", "la temperatura di un giorno"]}, {"q": "La neve ad agosto in pianura sarebbe…", "opts": ["un'eccezione", "normale", "un elemento del clima"]}, {"q": "Gli ELEMENTI del clima dicono…", "opts": ["com'è il clima", "perché il clima è così", "dove piove"]}, {"q": "I FATTORI del clima dicono…", "opts": ["perché il clima è così", "com'è il clima", "che ore sono"]}, {"q": "Quanti sono gli elementi climatici?", "opts": ["8", "10", "3"]}], [{"q": "Se sali in montagna la temperatura…", "opts": ["diminuisce", "aumenta", "resta uguale"]}, {"q": "Quale di questi è un ELEMENTO?", "opts": ["la temperatura", "l'altitudine", "le correnti marine"]}, {"q": "Quale di questi è un FATTORE?", "opts": ["l'altitudine", "le precipitazioni", "l'umidità"]}, {"q": "Il versante di una montagna esposto al sole si chiama…", "opts": ["solatìo", "bacìo", "nivale"]}, {"q": "Un lago profondo rende il clima…", "opts": ["più mite", "più freddo", "più secco"]}], [{"q": "Il clima di quasi tutta la Lombardia è…", "opts": ["continentale", "mediterraneo", "tropicale"]}, {"q": "Il clima continentale ha estati…", "opts": ["calde e afose", "fresche", "fredde con neve"]}, {"q": "Dove c'è il microclima mediterraneo?", "opts": ["sulle rive dei grandi laghi", "sulle Alpi", "in mezzo alla pianura"]}, {"q": "Quale pianta cresce sulle rive del Garda?", "opts": ["l'ulivo", "il pino mugo", "il muschio"]}, {"q": "Nel clima di alta montagna gli inverni sono…", "opts": ["lunghi e freddissimi", "miti e corti", "caldi"]}]], "vf": [[{"q": "Il clima si ripete ogni anno in modo simile.", "v": true, "perche": "Per esempio la nebbia torna ogni autunno."}, {"q": "Il clima è il tempo di un solo giorno.", "v": false, "perche": "Quello è il tempo atmosferico; il clima è la media."}, {"q": "Gli elementi climatici sono 8.", "v": true, "perche": "Temperatura, umidità, pressione, sole, precipitazioni..."}, {"q": "I fattori climatici sono 3.", "v": false, "perche": "Sono 10."}, {"q": "La temperatura è un elemento del clima.", "v": true, "perche": "Si misura, quindi è un elemento."}], [{"q": "Più si sale, più fa freddo.", "v": true, "perche": "È il fattore altitudine."}, {"q": "Più si va verso nord, più fa caldo.", "v": false, "perche": "Fa più freddo: è il fattore latitudine."}, {"q": "Il versante in ombra si chiama bacìo.", "v": true, "perche": "Quello al sole si chiama solatìo."}, {"q": "I boschi rendono il clima più umido.", "v": true, "perche": "È il fattore copertura vegetale."}, {"q": "L'uomo non può cambiare il clima.", "v": false, "perche": "Può: disboscamento, anidride carbonica."}], [{"q": "La Lombardia ha tre climi diversi.", "v": true, "perche": "Alta montagna, continentale, mediterraneo."}, {"q": "In pianura d'inverno c'è spesso la nebbia.", "v": true, "perche": "È il clima continentale."}, {"q": "Il microclima mediterraneo è sulle Alpi.", "v": false, "perche": "È sulle rive dei grandi laghi."}, {"q": "Sui laghi gli inverni sono miti.", "v": true, "perche": "I laghi profondi scaldano l'aria."}, {"q": "In alta montagna le piante cambiano a fasce.", "v": true, "perche": "Conifere, pascoli, muschi, ghiacciai."}]], "abbina": [[{"l": "Elementi", "r": "com'è il clima"}, {"l": "Fattori", "r": "perché è così"}, {"l": "Clima", "r": "tempo normale che si ripete"}, {"l": "Stato medio", "r": "adatto alla stagione"}, {"l": "Neve ad agosto", "r": "un'eccezione ❄️"}], [{"l": "Altitudine", "r": "salendo fa più freddo"}, {"l": "Latitudine", "r": "verso nord fa più freddo"}, {"l": "Solatìo", "r": "versante al sole ☀️"}, {"l": "Bacìo", "r": "versante in ombra"}, {"l": "Lago profondo", "r": "clima più mite"}], [{"l": "Alta montagna", "r": "inverni lunghi e neve"}, {"l": "Continentale", "r": "nebbia ed estati afose"}, {"l": "Mediterraneo", "r": "ulivi sui laghi 🫒"}, {"l": "Conifere", "r": "alberi con gli aghi"}, {"l": "Latifoglie", "r": "alberi con foglie larghe"}]]};
+</script>
+<script src="allenamento.js"></script>
+<script>
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js'); }
+</script>
+</body>
+</html>

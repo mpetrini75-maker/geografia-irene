@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FAF6EE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Geografia di Irene">
+<script src="alert.js"></script>
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>La Lombardia: il territorio — Allenamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EE; --card:#FFFFFF; --ink:#2F2A24;
+    --accent:#2F7A55; --accent-soft:#DDEFE3;
+    --green:#3E8E5A; --green-soft:#E2F0E6;
+    --red:#C2492F; --red-soft:#F6E1DB;
+    --blue:#3B6EA5; --blue-soft:#E2ECF5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:"Lexend","Trebuchet MS",Verdana,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.7; letter-spacing:0.3px; padding:24px 14px 60px;}
+  .wrap{max-width:620px;margin:0 auto;}
+  .back{display:inline-block;background:var(--accent-soft);color:var(--accent);text-decoration:none;border-radius:12px;padding:8px 16px;font-size:0.98rem;font-weight:bold;margin:0 8px 14px 0;}
+  h1{color:var(--accent);font-size:1.6rem;text-align:center;margin:0 0 6px;}
+  .sub{text-align:center;color:#8a7f70;margin:0 0 26px;font-size:1rem;}
+  .card{background:var(--card);border-radius:18px;padding:22px 20px;margin-bottom:22px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);border:1px solid #efe7da;}
+  .card h2{margin:0 0 10px;font-size:1.25rem;color:var(--accent);}
+  .card .lead{color:#8a7f70;margin:0 0 12px;font-size:0.97rem;}
+  .levelbar{margin:0 0 12px;}
+  .lvrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:0.98rem;color:var(--accent);}
+  .lvdots{display:inline-flex;gap:6px;}
+  .lvdot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);border:2px solid var(--accent-soft);color:#b9ad9c;font-size:0.85rem;font-weight:bold;}
+  .lvdot.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+  .ex{margin:14px 0;}
+  .qnum{font-weight:bold;color:var(--accent);}
+  .qtext{font-size:1.1rem;margin:6px 0 8px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{background:var(--bg);border:2px solid var(--accent-soft);
+    border-radius:12px;padding:13px 14px;font-size:1.05rem;cursor:pointer;
+    text-align:left;font-family:inherit;color:var(--ink);transition:all .15s;}
+  .opt:hover{border-color:var(--accent);}
+  .opt.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:bold;}
+  .opt.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);}
+  .feedback{margin-top:10px;font-size:1.02rem;font-weight:bold;min-height:24px;}
+  .feedback.ok{color:var(--green);}
+  .feedback.no{color:var(--red);}
+  .progress{text-align:center;font-size:1.05rem;margin:12px 0 0;color:#8a7f70;}
+  .star{font-size:1.4rem;}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+  .match-col{display:flex;flex-direction:column;gap:10px;}
+  .match-btn{background:var(--bg);border:2px solid var(--accent-soft);border-radius:12px;
+    padding:12px;font-size:0.98rem;cursor:pointer;font-family:inherit;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;transition:all .15s;}
+  .match-btn:hover{border-color:var(--accent);}
+  .match-btn.sel{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:bold;}
+  .match-btn.done{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:bold;cursor:default;opacity:0.85;}
+  .match-btn.flash{border-color:var(--red);background:var(--red-soft);}
+  .restart{display:inline-block;margin:12px auto 0;background:var(--accent);color:#fff;border:none;
+    border-radius:12px;padding:11px 22px;font-size:1rem;cursor:pointer;font-family:inherit;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Indice</a><a class="back" href="lombardia.html">📖 Ripassa la lezione</a>
+  <h1>🏋️ La Lombardia: il territorio — Allenamento</h1>
+  <p class="sub">Mattoncino 1 · 3 sezioni · 3 livelli ciascuna 💪</p>
+
+  <div class="card">
+    <h2>🧠 1. Domande</h2>
+    <p class="lead">Scegli la risposta giusta. Puoi riprovare finché non la trovi!</p>
+    <div class="levelbar" id="quiz-level"></div>
+    <div id="quiz-box"></div>
+    <div class="progress" id="quiz-prog"></div>
+  </div>
+
+  <div class="card">
+    <h2>✅ 2. Vero o falso</h2>
+    <p class="lead">Leggi la frase e tocca Vero o Falso. Dopo ti dico perché.</p>
+    <div class="levelbar" id="vf-level"></div>
+    <div id="vf-box"></div>
+    <div class="progress" id="vf-prog"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 3. Abbina</h2>
+    <p class="lead">Tocca una casella a sinistra, poi la sua coppia a destra. Collega tutte le coppie!</p>
+    <div class="levelbar" id="abbina-level"></div>
+    <div class="match-grid" id="abbina-grid"></div>
+    <div class="progress" id="abbina-prog"></div>
+  </div>
+</div>
+<script>
+window.ALLENAMENTO = {"quiz": [[{"q": "Qual è il capoluogo della Lombardia?", "opts": ["Milano", "Bergamo", "Brescia"]}, {"q": "Quanti abitanti ha la Lombardia, più o meno?", "opts": ["10 milioni", "1 milione", "50 milioni"]}, {"q": "Quante province ha la Lombardia?", "opts": ["12", "5", "20"]}, {"q": "Con quale Stato straniero confina?", "opts": ["Svizzera", "Francia", "Austria"]}, {"q": "Quale regione c'è a SUD della Lombardia?", "opts": ["Emilia-Romagna", "Piemonte", "Veneto"]}], [{"q": "Qual è la fascia più grande della Lombardia?", "opts": ["la pianura (47%)", "la collina (12%)", "la montagna (41%)"]}, {"q": "Qual è la fascia più piccola?", "opts": ["la collina", "la pianura", "la montagna"]}, {"q": "Il punto più alto della Lombardia è il…", "opts": ["Bernina", "Monte Bianco", "Etna"]}, {"q": "L'unico parco nazionale lombardo è il parco…", "opts": ["dello Stelvio", "del Gran Paradiso", "d'Abruzzo"]}, {"q": "Dove si va a sciare soprattutto?", "opts": ["Sondrio, Bergamo, Brescia", "Milano, Lodi, Pavia", "Cremona e Mantova"]}], [{"q": "Quale fiume segna il confine a sud?", "opts": ["il Po", "l'Adda", "il Ticino"]}, {"q": "Quante acque dolci italiane ci sono in Lombardia?", "opts": ["l'80%", "il 10%", "il 50%"]}, {"q": "Il lago più grande d'Italia è il…", "opts": ["Garda", "lago di Como", "lago d'Iseo"]}, {"q": "Il lago più profondo d'Italia è il…", "opts": ["lago di Como", "Garda", "lago Maggiore"]}, {"q": "Quali laghi sono TUTTI lombardi?", "opts": ["Como e Iseo", "Garda e Maggiore", "Maggiore e Lugano"]}]], "vf": [[{"q": "Il Veneto si trova a est della Lombardia.", "v": true, "perche": "Sulla cartina è a destra, cioè a est."}, {"q": "La Lombardia confina con la Francia.", "v": false, "perche": "Confina con la Svizzera, non con la Francia."}, {"q": "Milano è il capoluogo della Lombardia.", "v": true, "perche": "Milano è anche città metropolitana."}, {"q": "La Lombardia ha 5 province.", "v": false, "perche": "Le province sono 12."}, {"q": "A sud c'è l'Emilia-Romagna.", "v": true, "perche": "E il Po fa da confine."}], [{"q": "Quasi metà della Lombardia è pianura.", "v": true, "perche": "La pianura è il 47%."}, {"q": "La collina è la fascia più grande.", "v": false, "perche": "La collina è la più piccola: 12%."}, {"q": "Il Parco dello Stelvio è uno dei più grandi d'Europa.", "v": true, "perche": "Sta intorno all'Ortles-Cevedale."}, {"q": "Le aree protette sono il 27% della regione.", "v": true, "perche": "Ci sono 24 parchi regionali e 20 foreste."}, {"q": "In Lombardia non ci sono montagne sopra i 4000 m.", "v": false, "perche": "Il Bernina supera i 4000 m."}], [{"q": "Il Ticino è un affluente del Po.", "v": true, "perche": "È il primo e il più importante."}, {"q": "Il Garda è tutto in Lombardia.", "v": false, "perche": "È diviso tra Lombardia, Veneto e Trentino."}, {"q": "Il lago di Como ha la forma di una Y rovesciata.", "v": true, "perche": "I tre rami si incontrano a Bellagio."}, {"q": "I laghi lombardi sono di origine glaciale.", "v": true, "perche": "Li hanno scavati gli antichi ghiacciai."}, {"q": "Il lago Maggiore si chiama anche Lario.", "v": false, "perche": "Il Lario è il lago di Como; il Maggiore è il Verbano."}]], "abbina": [[{"l": "Milano", "r": "capoluogo 🏙️"}, {"l": "Svizzera", "r": "confine a nord-ovest"}, {"l": "Veneto", "r": "confine a est"}, {"l": "Emilia-Romagna", "r": "confine a sud"}, {"l": "Piemonte", "r": "confine a ovest"}], [{"l": "Montagna", "r": "41%"}, {"l": "Collina", "r": "12%"}, {"l": "Pianura", "r": "47%"}, {"l": "Bernina", "r": "punto più alto"}, {"l": "Stelvio", "r": "parco nazionale"}], [{"l": "Garda", "r": "il più grande d'Italia"}, {"l": "Como (Lario)", "r": "il più profondo d'Italia"}, {"l": "Maggiore", "r": "anche detto Verbano"}, {"l": "Iseo", "r": "anche detto Sebino"}, {"l": "Po", "r": "confine a sud 🌊"}]]};
+</script>
+<script src="allenamento.js"></script>
+<script>
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js'); }
+</script>
+</body>
+</html>
