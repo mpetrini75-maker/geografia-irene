@@ -1,10 +1,12 @@
-const CACHE = 'geografia-irene-v3';
+const CACHE = 'geografia-irene-v4';
 
 const ASSETS = [
   './',
   './alert.js',
   './allenamento.js',
   './app.js',
+  './carta.html',
+  './carta-allenamento.html',
   './clima.html',
   './clima-allenamento.html',
   './economia.html',
@@ -12,6 +14,16 @@ const ASSETS = [
   './icon-180.png',
   './icon-192.png',
   './icon-512.png',
+  './img/carta/fisica-muta.jpg',
+  './img/carta/fiumi.jpg',
+  './img/carta/laghi.jpg',
+  './img/carta/passi.jpg',
+  './img/carta/politica-muta-colori.jpg',
+  './img/carta/politica-muta.jpg',
+  './img/carta/province.jpg',
+  './img/carta/rilievi.jpg',
+  './img/carta/subregioni.jpg',
+  './img/carta/valli.jpg',
   './img/clima-carta.jpg',
   './img/clima-schema.jpg',
   './img/eco-p01.jpg',

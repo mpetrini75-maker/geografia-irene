@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FAF6EE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Geografia di Irene">
+<script src="alert.js"></script>
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>La Lombardia sulla carta — Allenamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EE; --card:#FFFFFF; --ink:#2F2A24;
+    --accent:#2F7A55; --accent-soft:#DDEFE3;
+    --green:#3E8E5A; --green-soft:#E2F0E6;
+    --red:#C2492F; --red-soft:#F6E1DB;
+    --blue:#3B6EA5; --blue-soft:#E2ECF5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:"Lexend","Trebuchet MS",Verdana,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.7; letter-spacing:0.3px; padding:24px 14px 60px;}
+  .wrap{max-width:620px;margin:0 auto;}
+  .back{display:inline-block;background:var(--accent-soft);color:var(--accent);text-decoration:none;border-radius:12px;padding:8px 16px;font-size:0.98rem;font-weight:bold;margin:0 8px 14px 0;}
+  h1{color:var(--accent);font-size:1.6rem;text-align:center;margin:0 0 6px;}
+  .sub{text-align:center;color:#8a7f70;margin:0 0 26px;font-size:1rem;}
+  .card{background:var(--card);border-radius:18px;padding:22px 20px;margin-bottom:22px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);border:1px solid #efe7da;}
+  .card h2{margin:0 0 10px;font-size:1.25rem;color:var(--accent);}
+  .card .lead{color:#8a7f70;margin:0 0 12px;font-size:0.97rem;}
+  .levelbar{margin:0 0 12px;}
+  .lvrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:0.98rem;color:var(--accent);}
+  .lvdots{display:inline-flex;gap:6px;}
+  .lvdot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);border:2px solid var(--accent-soft);color:#b9ad9c;font-size:0.85rem;font-weight:bold;}
+  .lvdot.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+  .ex{margin:14px 0;}
+  .qnum{font-weight:bold;color:var(--accent);}
+  .qtext{font-size:1.1rem;margin:6px 0 8px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{background:var(--bg);border:2px solid var(--accent-soft);
+    border-radius:12px;padding:13px 14px;font-size:1.05rem;cursor:pointer;
+    text-align:left;font-family:inherit;color:var(--ink);transition:all .15s;}
+  .opt:hover{border-color:var(--accent);}
+  .opt.correct{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:bold;}
+  .opt.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);}
+  .feedback{margin-top:10px;font-size:1.02rem;font-weight:bold;min-height:24px;}
+  .feedback.ok{color:var(--green);}
+  .feedback.no{color:var(--red);}
+  .progress{text-align:center;font-size:1.05rem;margin:12px 0 0;color:#8a7f70;}
+  .star{font-size:1.4rem;}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+  .match-col{display:flex;flex-direction:column;gap:10px;}
+  .match-btn{background:var(--bg);border:2px solid var(--accent-soft);border-radius:12px;
+    padding:12px;font-size:0.98rem;cursor:pointer;font-family:inherit;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;text-align:center;gap:6px;transition:all .15s;}
+  .match-btn:hover{border-color:var(--accent);}
+  .match-btn.sel{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:bold;}
+  .match-btn.done{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:bold;cursor:default;opacity:0.85;}
+  .match-btn.flash{border-color:var(--red);background:var(--red-soft);}
+  .restart{display:inline-block;margin:12px auto 0;background:var(--accent);color:#fff;border:none;
+    border-radius:12px;padding:11px 22px;font-size:1rem;cursor:pointer;font-family:inherit;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Indice</a><a class="back" href="carta.html">📖 Ripassa la lezione</a>
+  <h1>🏋️ La Lombardia sulla carta — Allenamento</h1>
+  <p class="sub">Mattoncino 5 · 3 sezioni · 3 livelli ciascuna 💪</p>
+
+  <div class="card">
+    <h2>🧠 1. Domande</h2>
+    <p class="lead">Scegli la risposta giusta. Puoi riprovare finché non la trovi!</p>
+    <div class="levelbar" id="quiz-level"></div>
+    <div id="quiz-box"></div>
+    <div class="progress" id="quiz-prog"></div>
+  </div>
+
+  <div class="card">
+    <h2>✅ 2. Vero o falso</h2>
+    <p class="lead">Leggi la frase e tocca Vero o Falso. Dopo ti dico perché.</p>
+    <div class="levelbar" id="vf-level"></div>
+    <div id="vf-box"></div>
+    <div class="progress" id="vf-prog"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 3. Abbina</h2>
+    <p class="lead">Tocca una casella a sinistra, poi la sua coppia a destra. Collega tutte le coppie!</p>
+    <div class="levelbar" id="abbina-level"></div>
+    <div class="match-grid" id="abbina-grid"></div>
+    <div class="progress" id="abbina-prog"></div>
+  </div>
+</div>
+<script>
+window.ALLENAMENTO = {"quiz": [[{"q": "Quali sono i tre gruppi delle Alpi lombarde?", "opts": ["Lepontine, Retiche, Orobiche", "Marittime, Cozie, Graie", "Dolomiti, Carniche, Giulie"]}, {"q": "Dove sono le Alpi Orobiche?", "opts": ["nel mezzo, sopra Bergamo", "in basso, sotto Pavia", "a sinistra, vicino al Piemonte"]}, {"q": "Quale montagna è nell'Appennino lombardo?", "opts": ["il Monte Lesima", "il Bernina", "il Resegone"]}, {"q": "Grigna e Resegone sono vicino a…", "opts": ["Lecco", "Mantova", "Pavia"]}, {"q": "Che cos'è un passo?", "opts": ["il punto più basso per attraversare una montagna", "la cima più alta", "un lago di montagna"]}], [{"q": "Quale passo è nell'Appennino?", "opts": ["il Penice", "lo Stelvio", "lo Spluga"]}, {"q": "Il passo all'angolo nord-est è…", "opts": ["lo Stelvio", "il Penice", "la Presolana"]}, {"q": "Qual è la valle più lunga?", "opts": ["la Valtellina", "la Val Sabbia", "la Val Cavallina"]}, {"q": "Nella Val Brembana scorre il…", "opts": ["Brembo", "Serio", "Mincio"]}, {"q": "Nella Val Camonica scorre l'…", "opts": ["Oglio", "Adda", "Ticino"]}], [{"q": "Il secondo nome del lago di Como è…", "opts": ["Lario", "Benaco", "Verbano"]}, {"q": "Il Benaco è il lago…", "opts": ["di Garda", "Maggiore", "d'Iseo"]}, {"q": "Brembo e Serio si gettano nell'…", "opts": ["Adda", "Oglio", "Ticino"]}, {"q": "Quale fiume esce dal lago di Garda?", "opts": ["il Mincio", "il Lambro", "l'Olona"]}, {"q": "Oltrepò vuol dire…", "opts": ["oltre il Po: sotto il fiume", "sopra il lago", "vicino a Milano"]}]], "vf": [[{"q": "Le Alpi Lepontine sono in alto a sinistra.", "v": true, "perche": "Ci trovi il Pizzo Stella."}, {"q": "L'Appennino è in alto, vicino alla Svizzera.", "v": false, "perche": "È in basso, nella punta sotto Pavia."}, {"q": "Il Bernina è nelle Alpi Retiche.", "v": true, "perche": "Lungo il confine nord."}, {"q": "Il Passo della Presolana è vicino al Pizzo della Presolana.", "v": true, "perche": "Hanno lo stesso nome."}, {"q": "Lo Spluga è un fiume.", "v": false, "perche": "È un passo, verso la Svizzera."}], [{"q": "La Valtellina va da sinistra a destra.", "v": true, "perche": "È la valle più lunga, in alto."}, {"q": "Nella Val Seriana scorre il Serio.", "v": true, "perche": "Il nome te lo dice da solo."}, {"q": "La Val Cavallina è vicino al lago d'Endine.", "v": true, "perche": "Guarda la carta delle valli."}, {"q": "I laghi della prof sono 13 perché ci sono 13 laghi.", "v": false, "perche": "Sono 8 laghi più 5 secondi nomi."}, {"q": "Il lago d'Iseo si chiama anche Sebino.", "v": true, "perche": "Come il Garda si chiama Benaco."}], [{"q": "Il Po fa da confine in basso.", "v": true, "perche": "Scorre da sinistra a destra."}, {"q": "Il Ticino esce dal lago di Como.", "v": false, "perche": "Esce dal lago Maggiore. Dal lago di Como esce l'Adda."}, {"q": "Monza e Brianza è proprio sopra Milano.", "v": true, "perche": "È la provincia più piccola."}, {"q": "La Lomellina è sotto il Po.", "v": false, "perche": "È sopra il Po; sotto ci sono i due Oltrepò."}, {"q": "Le province lombarde sono 12.", "v": true, "perche": "Sondrio è quella tutta di montagna."}]], "abbina": [[{"l": "Alpi Lepontine", "r": "Pizzo Stella"}, {"l": "Alpi Retiche", "r": "Bernina"}, {"l": "Alpi Orobiche", "r": "Pizzo Coca"}, {"l": "Appennino", "r": "Monte Lesima"}, {"l": "Lecco", "r": "Grigna e Resegone"}], [{"l": "Val Brembana", "r": "Brembo"}, {"l": "Val Seriana", "r": "Serio"}, {"l": "Valtellina", "r": "Adda"}, {"l": "Val Camonica", "r": "Oglio"}, {"l": "Val Trompia", "r": "Mella"}], [{"l": "Maggiore", "r": "Verbano"}, {"l": "Lugano", "r": "Ceresio"}, {"l": "Como", "r": "Lario"}, {"l": "Iseo", "r": "Sebino"}, {"l": "Garda", "r": "Benaco"}]]};
+</script>
+<script src="allenamento.js"></script>
+<script>
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js'); }
+</script>
+</body>
+</html>

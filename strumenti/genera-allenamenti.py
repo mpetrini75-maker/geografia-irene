@@ -1,4 +1,4 @@
-r"""Genera le 4 pagine -allenamento di Geografia di Irene da un unico modello.
+r"""Genera le 5 pagine -allenamento di Geografia di Irene da un unico modello.
 Le domande stanno qui sotto (prima opzione = quella giusta: l'app le mescola).
 Uso:  py strumenti\genera-allenamenti.py
 """
@@ -310,6 +310,51 @@ MATTONCINI = {
               ("Bacìo", "versante in ombra"), ("Lago profondo", "clima più mite")),
             A(("Alta montagna", "inverni lunghi e neve"), ("Continentale", "nebbia ed estati afose"), ("Mediterraneo", "ulivi sui laghi 🫒"),
               ("Conifere", "alberi con gli aghi"), ("Latifoglie", "alberi con foglie larghe")),
+        ],
+    },
+    "carta": {
+        "num": 5, "titolo": "La Lombardia sulla carta",
+        "quiz": [
+            [Q("Quali sono i tre gruppi delle Alpi lombarde?", "Lepontine, Retiche, Orobiche", "Marittime, Cozie, Graie", "Dolomiti, Carniche, Giulie"),
+             Q("Dove sono le Alpi Orobiche?", "nel mezzo, sopra Bergamo", "in basso, sotto Pavia", "a sinistra, vicino al Piemonte"),
+             Q("Quale montagna è nell'Appennino lombardo?", "il Monte Lesima", "il Bernina", "il Resegone"),
+             Q("Grigna e Resegone sono vicino a…", "Lecco", "Mantova", "Pavia"),
+             Q("Che cos'è un passo?", "il punto più basso per attraversare una montagna", "la cima più alta", "un lago di montagna")],
+            [Q("Quale passo è nell'Appennino?", "il Penice", "lo Stelvio", "lo Spluga"),
+             Q("Il passo all'angolo nord-est è…", "lo Stelvio", "il Penice", "la Presolana"),
+             Q("Qual è la valle più lunga?", "la Valtellina", "la Val Sabbia", "la Val Cavallina"),
+             Q("Nella Val Brembana scorre il…", "Brembo", "Serio", "Mincio"),
+             Q("Nella Val Camonica scorre l'…", "Oglio", "Adda", "Ticino")],
+            [Q("Il secondo nome del lago di Como è…", "Lario", "Benaco", "Verbano"),
+             Q("Il Benaco è il lago…", "di Garda", "Maggiore", "d'Iseo"),
+             Q("Brembo e Serio si gettano nell'…", "Adda", "Oglio", "Ticino"),
+             Q("Quale fiume esce dal lago di Garda?", "il Mincio", "il Lambro", "l'Olona"),
+             Q("Oltrepò vuol dire…", "oltre il Po: sotto il fiume", "sopra il lago", "vicino a Milano")],
+        ],
+        "vf": [
+            [V("Le Alpi Lepontine sono in alto a sinistra.", True, "Ci trovi il Pizzo Stella."),
+             V("L'Appennino è in alto, vicino alla Svizzera.", False, "È in basso, nella punta sotto Pavia."),
+             V("Il Bernina è nelle Alpi Retiche.", True, "Lungo il confine nord."),
+             V("Il Passo della Presolana è vicino al Pizzo della Presolana.", True, "Hanno lo stesso nome."),
+             V("Lo Spluga è un fiume.", False, "È un passo, verso la Svizzera.")],
+            [V("La Valtellina va da sinistra a destra.", True, "È la valle più lunga, in alto."),
+             V("Nella Val Seriana scorre il Serio.", True, "Il nome te lo dice da solo."),
+             V("La Val Cavallina è vicino al lago d'Endine.", True, "Guarda la carta delle valli."),
+             V("I laghi della prof sono 13 perché ci sono 13 laghi.", False, "Sono 8 laghi più 5 secondi nomi."),
+             V("Il lago d'Iseo si chiama anche Sebino.", True, "Come il Garda si chiama Benaco.")],
+            [V("Il Po fa da confine in basso.", True, "Scorre da sinistra a destra."),
+             V("Il Ticino esce dal lago di Como.", False, "Esce dal lago Maggiore. Dal lago di Como esce l'Adda."),
+             V("Monza e Brianza è proprio sopra Milano.", True, "È la provincia più piccola."),
+             V("La Lomellina è sotto il Po.", False, "È sopra il Po; sotto ci sono i due Oltrepò."),
+             V("Le province lombarde sono 12.", True, "Sondrio è quella tutta di montagna.")],
+        ],
+        "abbina": [
+            A(("Alpi Lepontine", "Pizzo Stella"), ("Alpi Retiche", "Bernina"), ("Alpi Orobiche", "Pizzo Coca"),
+              ("Appennino", "Monte Lesima"), ("Lecco", "Grigna e Resegone")),
+            A(("Val Brembana", "Brembo"), ("Val Seriana", "Serio"), ("Valtellina", "Adda"),
+              ("Val Camonica", "Oglio"), ("Val Trompia", "Mella")),
+            A(("Maggiore", "Verbano"), ("Lugano", "Ceresio"), ("Como", "Lario"),
+              ("Iseo", "Sebino"), ("Garda", "Benaco")),
         ],
     },
 }
