@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geografia - Il piano per la verifica sulla Lombardia</title>
+<link rel="manifest" href="manifest.json">
+<script src="alert.js"></script>
+<meta name="theme-color" content="#FAF6EE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Geografia di Irene">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .giorno{border-left:6px solid var(--accent);}
+  .quando{display:inline-block;background:var(--accent);color:#fff;border-radius:99px;
+    padding:2px 12px;font-weight:bold;font-size:0.92rem;margin-bottom:6px;}
+  .tempo-badge{display:inline-block;background:var(--giallo-soft);border-radius:99px;
+    padding:2px 12px;font-size:0.92rem;margin-left:6px;}
+  .vai{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+    border-radius:12px;padding:10px 16px;font-weight:bold;margin:4px 6px 4px 0;}
+  .vai.chiaro{background:var(--accent-soft);color:var(--accent);}
+  .fatto{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:bold;
+    color:var(--accent);cursor:pointer;font-size:1.05rem;}
+  .fatto input{width:26px;height:26px;accent-color:var(--accent);cursor:pointer;}
+  .card.done{opacity:0.6;}
+  .barra{background:var(--accent-soft);border-radius:99px;height:16px;overflow:hidden;margin:10px 0 4px;}
+  .barra div{background:var(--accent);height:100%;width:0;transition:width .3s ease;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backbtn" href="index.html">← Indice</a>
+  <h1>🎯 Il piano per la verifica sulla Lombardia</h1>
+  <p class="sub">Verifica scritta di mercoledì 14 ottobre · un mattoncino al giorno</p>
+
+  <div class="card">
+    <h2>📌 Come funziona</h2>
+    <p>Hai <b>4 giorni</b>, da sabato a martedì. Ogni giorno apri <b>un solo mattoncino</b>: niente di più.</p>
+    <p>Bastano <b>40 minuti</b>. Quando hai finito, metti la spunta su <b>Fatto!</b></p>
+    <div class="tip">🎨 <b>Il metodo è sempre lo stesso:</b> premi 🔊 Ascolta, guarda la cartina, poi rispondi <b>a voce</b> alle domande. Non serve leggere tutto e non serve sottolineare.</div>
+    <div class="barra"><div id="barra"></div></div>
+    <p id="conta" style="text-align:center;font-weight:bold;color:var(--accent)">0 giorni su 4</p>
+  </div>
+
+  <div class="card">
+    <h2>📋 Cosa chiede la prof</h2>
+    <p>La prof ha scritto che nella verifica ci saranno:</p>
+    <ul>
+      <li>l'<b>introduzione</b> e la <b>morfologia</b>, cioè com'è fatto il territorio</li>
+      <li>i <b>caratteri fisici e politici</b>, cioè i nomi sulla carta</li>
+      <li>la <b>demografia</b> e l'<b>economia</b></li>
+      <li>i <b>climi</b></li>
+      <li>i <b>grafici</b> e le <b>carte tematiche</b>, che avete fatto in classe</li>
+    </ul>
+    <div class="tip-green">👍 Tutto questo c'è già nei mattoncini della tua app. Non c'è niente di nuovo da cercare.</div>
+  </div>
+
+  <div class="card giorno" id="g1">
+    <span class="quando">Sabato 10 ottobre</span><span class="tempo-badge">⏱️ 40 minuti</span>
+    <h2>🏔️ Giorno 1: il territorio</h2>
+    <p>Oggi scopri <b>com'è fatta la Lombardia</b>: i confini, le tre fasce, le Alpi, i fiumi e i laghi.</p>
+    <p>È l'<b>introduzione</b> e la <b>morfologia</b> della verifica.</p>
+    <ol>
+      <li>Apri il mattoncino e ascolta i riquadri, uno alla volta.</li>
+      <li>Alla fine rispondi a voce alle 5 domande.</li>
+      <li>Se ti va, fai l'allenamento.</li>
+    </ol>
+    <a class="vai" href="lombardia.html">▶ Il territorio</a>
+    <a class="vai chiaro" href="lombardia-allenamento.html">🏋️ Allenamento</a>
+    <label class="fatto"><input type="checkbox" data-giorno="g1"> Fatto!</label>
+  </div>
+
+  <div class="card giorno" id="g2">
+    <span class="quando">Domenica 11 ottobre</span><span class="tempo-badge">⏱️ 40 minuti</span>
+    <h2>🗺️ Giorno 2: la carta fisica</h2>
+    <p><b>Prima, 5 minuti di ricordo:</b> senza guardare, di' a voce le tre fasce e i cinque laghi di ieri. Poi controlla.</p>
+    <p>Oggi i <b>nomi sulla carta fisica</b>: monti, passi, valli, laghi, fiumi e pianura. Sono i <b>caratteri fisici</b> della verifica.</p>
+    <ol>
+      <li>Nel mattoncino "La Lombardia sulla carta" fai i riquadri <b>da 1 a 7</b>.</li>
+      <li>Fermati prima delle province: quelle sono per domani.</li>
+    </ol>
+    <div class="tip">🎨 <b>Trucco:</b> tanti nomi si aiutano a vicenda. La valle porta il nome del suo fiume: in Valtellina scorre l'Adda, in Val Camonica l'Oglio.</div>
+    <a class="vai" href="carta.html">▶ La Lombardia sulla carta</a>
+    <label class="fatto"><input type="checkbox" data-giorno="g2"> Fatto!</label>
+  </div>
+
+  <div class="card giorno" id="g3">
+    <span class="quando">Lunedì 12 ottobre</span><span class="tempo-badge">⏱️ 45 minuti</span>
+    <h2>🏭 Giorno 3: le persone, il lavoro e le province</h2>
+    <p><b>Prima, 5 minuti di ricordo:</b> apri una carta muta e trova 5 nomi a tua scelta.</p>
+    <p>Oggi due pezzi:</p>
+    <ol>
+      <li><b>Popolazione ed economia</b>, tutto il mattoncino. Guarda bene i <b>grafici</b> e le <b>carte</b> dell'agricoltura, dell'industria e del turismo: nella verifica ci sono i grafici e le carte tematiche. C'è anche la carta del tuo gruppo!</li>
+      <li>Nel mattoncino della carta, i riquadri <b>8 e 9</b>: le 12 province e le 5 subregioni. Sono i <b>caratteri politici</b>.</li>
+    </ol>
+    <a class="vai" href="economia.html">▶ Popolazione ed economia</a>
+    <a class="vai chiaro" href="carta.html">🗺️ Province e subregioni</a>
+    <label class="fatto"><input type="checkbox" data-giorno="g3"> Fatto!</label>
+  </div>
+
+  <div class="card giorno" id="g4">
+    <span class="quando">Martedì 13 ottobre</span><span class="tempo-badge">⏱️ 35 minuti</span>
+    <h2>🌦️ Giorno 4: il clima e il ripasso</h2>
+    <p>Oggi a scuola c'è anche la presentazione di Storia, quindi facciamo una cosa leggera.</p>
+    <ol>
+      <li>Il mattoncino del <b>clima</b>: è corto, 4 riquadri.</li>
+      <li>Poi il <b>ripasso</b>: apri i mattoncini e guarda soltanto le <b>"Mappe da tenere in mente"</b>, una per mattoncino.</li>
+      <li>Per finire, la <b>prova sulle carte mute</b> in fondo al mattoncino della carta.</li>
+    </ol>
+    <a class="vai" href="clima.html">▶ Il clima</a>
+    <a class="vai chiaro" href="carta.html">✏️ Carte mute</a>
+    <label class="fatto"><input type="checkbox" data-giorno="g4"> Fatto!</label>
+  </div>
+
+  <div class="card">
+    <h2>☀️ Mercoledì mattina, prima della verifica</h2>
+    <p>Solo <b>10 minuti</b>: riguarda le mappe. Non studiare niente di nuovo.</p>
+    <p>Hai fatto ogni giorno la tua parte, e lo sai. Respira e parti dalle domande più facili. 💪</p>
+  </div>
+
+  <div class="card">
+    <h2>📎 E la storia della Lombardia?</h2>
+    <p>Nell'elenco della prof per questa verifica la <b>storia</b> non c'è. Se ti avanza tempo puoi riguardarla, ma non è obbligatoria.</p>
+    <a class="vai chiaro" href="storia.html">🏰 La storia della Lombardia</a>
+  </div>
+
+  <footer>🔗 <a href="index.html">Indice</a> · Fatto con cura per Irene 🌿</footer>
+</div>
+<script src="app.js"></script>
+<script>
+  (function(){
+    var CHIAVE = "piano-lombardia-fatti";
+    var fatti = {};
+    try { fatti = JSON.parse(localStorage.getItem(CHIAVE) || "{}"); } catch(e) { fatti = {}; }
+    var caselle = document.querySelectorAll("input[data-giorno]");
+    function aggiorna(){
+      var n = 0;
+      caselle.forEach(function(c){
+        var card = document.getElementById(c.dataset.giorno);
+        if(c.checked){ n++; card.classList.add("done"); } else { card.classList.remove("done"); }
+      });
+      document.getElementById("barra").style.width = (n / caselle.length * 100) + "%";
+      document.getElementById("conta").textContent = n === caselle.length
+        ? "🎉 4 giorni su 4: sei pronta!"
+        : n + (n === 1 ? " giorno" : " giorni") + " su " + caselle.length;
+    }
+    caselle.forEach(function(c){
+      c.checked = !!fatti[c.dataset.giorno];
+      c.addEventListener("change", function(){
+        fatti[c.dataset.giorno] = c.checked;
+        try { localStorage.setItem(CHIAVE, JSON.stringify(fatti)); } catch(e) {}
+        aggiorna();
+      });
+    });
+    aggiorna();
+  })();
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js'); }
+</script>
+</body>
+</html>
