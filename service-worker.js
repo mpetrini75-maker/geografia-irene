@@ -1,4 +1,4 @@
-const CACHE = 'geografia-irene-v6';
+const CACHE = 'geografia-irene-v7';
 
 const ASSETS = [
   './',
@@ -60,6 +60,7 @@ const ASSETS = [
   './lombardia-allenamento.html',
   './manifest.json',
   './piano-lombardia.html',
+  './schemi/storia-lombardia.pdf',
   './storia.html',
   './storia-allenamento.html',
   './style.css',
