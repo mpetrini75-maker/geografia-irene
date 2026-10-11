@@ -54,7 +54,16 @@ async def main():
             if not tutto and vecchio.get(nome) == impronta and (AUDIO / nome).exists():
                 saltati += 1
                 continue
-            await edge_tts.Communicate(testo, VOCE, rate=RATE, pitch=PITCH).save(str(AUDIO / nome))
+            # si registra in un file a parte e lo si mette al suo posto solo se e' venuto bene:
+            # un errore del servizio voci (403 del 10/10/2026) lasciava un mp3 vuoto col nome giusto
+            prova = AUDIO / (nome + ".tmp")
+            try:
+                await edge_tts.Communicate(testo, VOCE, rate=RATE, pitch=PITCH).save(str(prova))
+                if prova.stat().st_size < 2000:
+                    raise RuntimeError(f"{nome}: registrazione vuota ({prova.stat().st_size} byte)")
+                prova.replace(AUDIO / nome)
+            finally:
+                prova.unlink(missing_ok=True)
             fatti += 1
             print(f"  {nome}: {len(testo)} caratteri")
     for f in AUDIO.glob("*.mp3"):
