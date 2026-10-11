@@ -58,10 +58,23 @@ async def main():
             # un errore del servizio voci (403 del 10/10/2026) lasciava un mp3 vuoto col nome giusto
             prova = AUDIO / (nome + ".tmp")
             try:
-                await edge_tts.Communicate(testo, VOCE, rate=RATE, pitch=PITCH).save(str(prova))
-                if prova.stat().st_size < 2000:
-                    raise RuntimeError(f"{nome}: registrazione vuota ({prova.stat().st_size} byte)")
+                # 11/10/2026: il servizio voci risponde 403 a caso, una richiesta si' e una no.
+                # Si riprova la stessa registrazione fino a 8 volte prima di arrendersi.
+                for tentativo in range(8):
+                    try:
+                        await edge_tts.Communicate(testo, VOCE, rate=RATE, pitch=PITCH).save(str(prova))
+                        if prova.stat().st_size < 2000:
+                            raise RuntimeError(f"{nome}: registrazione vuota ({prova.stat().st_size} byte)")
+                        break
+                    except Exception:
+                        if tentativo == 7:
+                            raise
+                        await asyncio.sleep(4 + 4 * tentativo)
                 prova.replace(AUDIO / nome)
+                # l'indice si salva subito: se il servizio voci si blocca a meta' (403 dell'11/10/2026),
+                # al giro dopo si riparte da dove si era arrivati invece di rifare tutto
+                vecchio[nome] = impronta
+                indice_f.write_text(json.dumps(vecchio, indent=1), encoding="utf-8")
             finally:
                 prova.unlink(missing_ok=True)
             fatti += 1
